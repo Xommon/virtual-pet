@@ -12,6 +12,14 @@ public class VirtualPet {
 		return name = nameInput;
 	}
 
+	public void tick() {
+		hunger -= 8;
+		thirst -= 7;
+		fun -= 10;
+		bladder -= 5;
+		energy -= 6;
+	}
+
 	public VirtualPet() {
 	}
 
@@ -29,57 +37,96 @@ public class VirtualPet {
 
 	public void feedPet() {
 		hunger += 35;
-		thirst -= 23;
-		fun -= 17;
-		bladder -= 20;
-		energy -= 34;
+		thirst -= 10;
+		fun -= 13;
+		bladder -= 16;
+		energy -= 29;
+		System.out.println("You give " + name + " some snacks. Yummy!");
 		System.out.println("(\\___/)\n( ^w^ )\nc(\")(\")");
 		maxStats();
 	}
 
 	public void waterPet() {
-		hunger -= 21;
+		hunger -= 11;
 		thirst += 35;
-		fun -= 9;
-		bladder -= 36;
-		energy -= 11;
+		fun -= 3;
+		bladder -= 21;
+		energy -= 5;
+		System.out.println("You give " + name + " some water.");
+		System.out.println("(\\___/)\n( ^w^ )\nc(\")(\")");
 		maxStats();
 	}
 
 	public void playPet() {
-		hunger -= 20;
-		thirst -= 22;
-		fun += 10;
-		bladder -= 24;
-		energy -= 37;
+		hunger -= 8;
+		thirst -= 10;
+		fun += 30;
+		bladder -= 11;
+		energy -= 25;
+		System.out.println("You play with " + name + "!");
+		System.out.println("(\\___/)\n( ^o^ )\nc(\")(\")");
 		maxStats();
 	}
 
 	public void peePet() {
-		hunger -= 21;
-		thirst -= 21;
-		fun -= 26;
+		hunger -= 14;
+		thirst -= 14;
+		fun -= 18;
 		bladder = 100;
-		energy -= 14;
+		energy -= 13;
+		System.out.println("You let " + name + " outside to pee.");
+		System.out.println("(\\___/)\n( ~.~ )\nc(\")(\")");
 		maxStats();
 	}
 
 	public void napPet() {
-		hunger -= 35;
-		thirst -= 34;
-		fun -= 23;
-		bladder -= 24;
+		hunger -= 17;
+		thirst -= 18;
+		fun -= 13;
+		bladder -= 15;
 		energy = 100;
+		System.out.println("You tuck " + name + " in for a nap.");
+		System.out.println("(\\___/)\n( -x- ) zZZ\nc(\")(\")");
 		maxStats();
 	}
 
-	public void displayOptions() {
-		System.out.println("What would you like to do?");
-		System.out.println("1: Feed " + this.name + " snacks");
-		System.out.println("2: Give " + this.name + " some water");
-		System.out.println("3: Play with " + this.name);
-		System.out.println("4: Take " + this.name + " to the bathroom");
-		System.out.println("5: Put " + this.name + " down for a nap");
+	public void overrideAction() {
+		if (bladder <= 0) {
+			hunger -= 18;
+			thirst -= 18;
+			fun -= 27;
+			bladder = 100;
+			energy -= 15;
+			System.out.println(name + " peed themselves. Are you happy about that?");
+			System.out.println("(\\___/)\n( ò-ó )\nc(\")(\")");
+		} else if (energy <= 0) {
+			hunger -= 28;
+			thirst -= 28;
+			fun -= 27;
+			bladder -= 15;
+			energy = 100;
+			System.out.println(name + " collapsed from exhaution.");
+			System.out.println("(\\___/)\n( @_@ )\nc(\")(\")");
+			System.exit(0);
+		} else if (hunger <= 0) {
+			hunger = 0;
+			thirst = 0;
+			fun = 0;
+			bladder = 0;
+			energy = 0;
+			System.out.println(name + " has died from starvation.");
+			System.out.println("(\\___/)\n( x-x )\nc(\")(\")");
+			System.exit(0);
+		} else if (thirst <= 0) {
+			hunger = 0;
+			thirst = 0;
+			fun = 0;
+			bladder = 0;
+			energy = 0;
+			System.out.println(name + " has died from dehydration.");
+			System.out.println("(\\___/)\n( x-x )\nc(\")(\")");
+			System.exit(0);
+		}
 	}
 
 	public void displayStats() {
@@ -89,17 +136,4 @@ public class VirtualPet {
 		System.out.println("Bladder: " + fun);
 		System.out.println("Energy: " + energy);
 	}
-
-	// public double play() {
-	// return fun;
-	// }
-	//
-	// public double pee() {
-	// return bladder;
-	// }
-	//
-	// public double sleep() {
-	// return energy;
-	// }
-
 }

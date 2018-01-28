@@ -17,59 +17,37 @@ public class VirtualPetApp {
 		boolean dead = false;
 		pet.displayStats();
 		System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||");
-		pet.displayOptions();
 		System.out.println("(\\___/)\n( 'x' )\nc(\")(\")");
 
 		while (dead == false) {
+			System.out.println("What would you like to do?");
+			System.out.println("1: Feed " + getName + " snacks");
+			System.out.println("2: Give " + getName + " some water");
+			System.out.println("3: Play with " + getName);
+			System.out.println("4: Take " + getName + " to the bathroom");
+			System.out.println("5: Put " + getName + " down for a nap");
 
 			String optionEntered = input.nextLine();
 
-			// 1: Feed
+			pet.tick();
+
 			if (optionEntered.equals("1")) {
-				System.out.println("You give " + getName + " some snacks. Yummy!");
 				pet.feedPet();
-				pet.displayStats();
-				System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||");
-				pet.displayOptions();
-			}
-
-			// 2: Water
-			if (optionEntered.equals("2")) {
-				System.out.println("You give " + getName + " some water.");
+			} else if (optionEntered.equals("2")) {
 				pet.waterPet();
-				pet.displayStats();
-				System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||");
-				pet.displayOptions();
-			}
-
-			// 3: Player
-			if (optionEntered.equals("3")) {
-				System.out.println("You play with " + getName + "!");
+			} else if (optionEntered.equals("3")) {
 				pet.playPet();
-				pet.displayStats();
-				System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||");
-				pet.displayOptions();
-			}
-
-			// 4: Bathroom
-			if (optionEntered.equals("1")) {
-				System.out.println("You let " + getName + " outside to pee.");
+			} else if (optionEntered.equals("4")) {
 				pet.peePet();
-				pet.displayStats();
-				System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||");
-				pet.displayOptions();
-			}
-
-			// 5: Sleep
-			if (optionEntered.equals("1")) {
-				System.out.println("You tuck " + getName + " in for a nap.");
+			} else if (optionEntered.equals("5")) {
 				pet.napPet();
-				pet.displayStats();
-				System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||");
-				pet.displayOptions();
+			} else {
+				System.out.println("You do nothing with " + getName);
+				System.out.println("(\\___/)\n( >-> )\nc(\")(\")");
 			}
+
+			System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||");
+			pet.displayStats();
 		}
-
 	}
-
 }
